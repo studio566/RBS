@@ -196,12 +196,11 @@
         }
         .card:active { transform: scale(0.97); }
 
-        /* IMAGE HANDLING - THE FIX */
+        /* IMAGE HANDLING - LOCAL ONLY FIX */
         .card-img-box {
             height: 70%; width: 100%; position: relative; overflow: hidden; background: #000;
         }
         
-        /* Image styling to ensure perfect fit */
         .card-img-box img { 
             width: 100%; height: 100%; 
             object-fit: cover;
@@ -210,6 +209,13 @@
         }
         
         .card:hover .card-img-box img { transform: scale(1.1); opacity: 1; }
+
+        /* ERROR MESSAGE IN BOX IF FILE MISSING */
+        .img-err-msg {
+            width: 100%; height: 100%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            color: #ff5555; font-size: 0.6rem; border: 1px dashed #444;
+        }
 
         .card-details {
             height: 30%; padding: 12px;
@@ -375,8 +381,7 @@
             <!-- Card 1 -->
             <div class="card" onclick="openGal('tshirt', 'Custom T-Shirts')">
                 <div class="card-img-box">
-                    <!-- Netlify Fix: Using robust URLs directly so they work without image folder -->
-                    <img src="images/tshirt_1.jpg" onerror="this.src='https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&q=80'">
+                    <img src="images/tshirt_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/tshirt_1.jpg</div>'">
                 </div>
                 <div class="card-details">
                     <div class="card-title">T-Shirts</div>
@@ -387,7 +392,7 @@
             <!-- Card 2 -->
             <div class="card" onclick="openGal('cap', 'Pro Caps')">
                 <div class="card-img-box">
-                    <img src="images/cap_1.jpg" onerror="this.src='https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&q=80'">
+                    <img src="images/cap_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/cap_1.jpg</div>'">
                 </div>
                 <div class="card-details">
                     <div class="card-title">Caps</div>
@@ -398,7 +403,7 @@
             <!-- Card 3 -->
             <div class="card" onclick="openGal('mug', 'Magic Mugs')">
                 <div class="card-img-box">
-                    <img src="images/mug_1.jpg" onerror="this.src='https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&q=80'">
+                    <img src="images/mug_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/mug_1.jpg</div>'">
                 </div>
                 <div class="card-details">
                     <div class="card-title">Mugs</div>
@@ -409,7 +414,7 @@
             <!-- Card 4 -->
             <div class="card" onclick="openGal('gift', 'Luxury Gifts')">
                 <div class="card-img-box">
-                    <img src="images/gift_1.jpg" onerror="this.src='https://images.unsplash.com/photo-1513201099705-a9746e1e201f?w=500&q=80'">
+                    <img src="images/gift_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/gift_1.jpg</div>'">
                 </div>
                 <div class="card-details">
                     <div class="card-title">Gifts</div>
@@ -420,7 +425,7 @@
             <!-- Card 5 (Full Width) -->
             <div class="card full" onclick="openGal('all', 'Studio Services')">
                 <div class="card-img-box">
-                    <img src="images/all_1.jpg" onerror="this.src='https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80'">
+                    <img src="images/all_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/all_1.jpg</div>'">
                 </div>
                 <div class="card-details">
                     <div class="card-title">All Printing Services</div>
@@ -482,16 +487,6 @@
         let currentCat = "";
         let selectedIdx = -1;
 
-        // Smart Backup Image System for Netlify/Mobile
-        // Agar phone me folder nahi hai, toh ye online images use karega
-        const keywords = {
-            'tshirt': 't-shirt, fashion',
-            'cap': 'baseball cap, hat',
-            'mug': 'coffee mug',
-            'gift': 'gift box, present',
-            'all': 'printing service'
-        };
-
         /* INITIALIZATION */
         window.onload = () => {
             // Fake loading time for premium feel
@@ -538,7 +533,7 @@
             document.getElementById('p-phone').innerText = "+91 " + user.p;
         }
 
-        /* GALLERY SYSTEM */
+        /* GALLERY SYSTEM - STRICTLY LOCAL IMAGES */
         function openGal(key, title) {
             currentCat = title;
             selectedIdx = -1;
@@ -559,18 +554,13 @@
                 } else {
                     el.className = "gal-item";
                     
-                    // SMART IMAGE LOADER:
-                    // Pehle local 'images/key_i.jpg' try karega.
-                    // Agar fail hua (Netlify/Phone upload issue), toh Unsplash se HD image load karega.
-                    const searchTerm = keywords[key] || 'printing';
-                    const onlineImg = `https://source.unsplash.com/featured/500x500/?${searchTerm}&sig=${i}`;
-                    // Use standard image format 
-                    // Note: Unsplash Source is sometimes slow, using reliable backup
-                    let reliableUrl = `https://images.unsplash.com/photo-158${i}850561407-ed78c282e89b?w=400&h=400&fit=crop`; // Generic Fallback
-                    if(key === 'tshirt') reliableUrl = `https://images.unsplash.com/photo-152157216347${i}-6864f9cf17ab?w=400&h=400&fit=crop`;
-                    if(key === 'mug') reliableUrl = `https://images.unsplash.com/photo-151422874258${i}-6b1558fcca3d?w=400&h=400&fit=crop`;
+                    // FIXED: Removed all Internet/Unsplash Fallbacks
+                    // Now it attempts to load local image. If fails, shows text error.
+                    const imgPath = `images/${key}_${i}.jpg`;
                     
-                    el.innerHTML = `<img src="images/${key}_${i}.jpg" onerror="this.src='${reliableUrl}'">`;
+                    el.innerHTML = `
+                        <img src="${imgPath}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'color:red; font-size:10px; display:flex; justify-content:center; align-items:center; height:100%; text-align:center;\'>FILE MISSING<br>${imgPath}</div>'">
+                    `;
                 }
 
                 el.onclick = () => selectItem(el, i);
