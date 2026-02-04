@@ -5,66 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#000000">
     <meta name="description" content="Ritesh Bhatia Studio - Premium Printing Services">
-    <title>Ritesh Bhatia Studio | Pro</title>
+    <meta name="author" content="Pratik Sharma">
+    <title>Ritesh Bhatia Studio | Premium</title>
     
     <!-- Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* ==========================================================================
-           1. MASTER CSS VARIABLES & RESET
+           1. MASTER CSS VARIABLES
            ========================================================================== */
         :root {
-            /* Luxury Dark Theme */
             --bg-body: #050505;
             --bg-radial: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 100%);
+            --glass-bg: rgba(20, 20, 20, 0.75);
+            --glass-border: 1px solid rgba(255, 215, 0, 0.15);
+            --glass-blur: blur(15px);
             
-            /* Glassmorphism Cards */
-            --glass-bg: rgba(20, 20, 20, 0.7);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-            --glass-blur: blur(12px);
-            
-            /* Gold Gradient */
             --gold-primary: #FFD700;       
+            --gold-secondary: #DAA520;
             --gold-gradient: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
-            --gold-glow: rgba(255, 215, 0, 0.4);
+            --gold-glow: rgba(255, 215, 0, 0.35);
             
             --text-main: #ffffff;
-            --text-muted: #9e9e9e;
-            
-            --danger: #ff3b3b;
-            --success: #25D366; 
-
-            --header-h: 70px;
-            --nav-h: 75px;
-            --border-rad: 20px;
+            --danger: #ff3333;
+            --nav-h: 70px;
         }
 
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            font-family: 'Montserrat', sans-serif;
-            user-select: none;
-            outline: none;
+            font-family: 'Rajdhani', sans-serif;
+            user-select: none; outline: none;
         }
 
         body {
             background: var(--bg-body);
             background-image: var(--bg-radial);
             color: var(--text-main);
-            height: 100vh; width: 100vw;
+            height: 100dvh; 
+            width: 100vw;
             overflow: hidden;
             display: flex; flex-direction: column;
         }
 
-        /* Smooth Scrollbar */
-        ::-webkit-scrollbar { width: 0px; }
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-secondary); border-radius: 10px; }
 
         /* ==========================================================================
-           2. CINEMATIC LOADER
+           2. LOADER
            ========================================================================== */
         #app-loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -72,88 +68,73 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
-
-        .loader-logo-cont {
-            position: relative; margin-bottom: 25px;
-        }
-
         .spinner-gold {
             width: 80px; height: 80px;
-            border: 3px solid transparent;
-            border-top: 3px solid var(--gold-primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            box-shadow: 0 0 20px var(--gold-glow);
+            border: 2px solid rgba(255, 215, 0, 0.1); border-top: 3px solid var(--gold-primary);
+            border-radius: 50%; animation: spin 1s linear infinite;
+            box-shadow: 0 0 30px var(--gold-glow); margin-bottom: 20px;
         }
-        
-        .spinner-inner {
-            position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 3px solid transparent; border-bottom: 3px solid #fff;
-            border-radius: 50%; animation: spinReverse 1.5s linear infinite;
-        }
-
         .brand-text-loader {
-            font-family: 'Orbitron', sans-serif; font-size: 1.2rem; letter-spacing: 3px;
+            font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 4px;
             background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            font-weight: 700; text-transform: uppercase; text-align: center; line-height: 1.5;
-            animation: fadeIn 2s ease;
+            font-weight: 700; text-transform: uppercase; text-align: center;
         }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes spinReverse { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
-        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* ==========================================================================
-           3. AUTH SCREEN (VIP ENTRANCE)
+           3. AUTH SCREEN (LOGIN)
            ========================================================================== */
         #auth-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+            background: rgba(0,0,0,0.96); backdrop-filter: blur(20px);
             z-index: 50000; display: none;
             flex-direction: column; justify-content: center; align-items: center; padding: 25px;
         }
 
         .auth-card {
-            width: 100%; max-width: 400px;
-            background: rgba(30, 30, 30, 0.6);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 40px 30px; border-radius: 25px;
+            width: 100%; max-width: 380px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--gold-secondary);
+            padding: 30px 25px; border-radius: 25px;
             text-align: center;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.15);
         }
 
         .auth-logo {
-            font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--gold-primary);
-            margin-bottom: 30px; letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: var(--gold-primary);
+            margin-bottom: 25px; letter-spacing: 2px;
             text-shadow: 0 0 15px var(--gold-glow);
         }
 
         .input-field {
-            width: 100%; padding: 18px; margin-bottom: 15px;
-            background: rgba(0,0,0,0.5); border: 1px solid #333;
+            width: 100%; padding: 15px; margin-bottom: 15px;
+            background: rgba(0,0,0,0.6); border: 1px solid #333;
             color: white; border-radius: 12px; font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; text-align: center;
         }
-        .input-field:focus { border-color: var(--gold-primary); box-shadow: 0 0 15px rgba(255,215,0,0.1); }
+        .input-field:focus { border-color: var(--gold-primary); }
 
-        .policy-alert {
-            display: flex; gap: 10px; align-items: start;
-            background: rgba(255, 42, 42, 0.1); border: 1px solid rgba(255, 42, 42, 0.3);
-            padding: 12px; border-radius: 10px; text-align: left; margin: 15px 0;
+        .policy-check {
+            display: flex; gap: 12px; align-items: flex-start;
+            text-align: left; margin: 15px 0 20px 0;
+            padding: 10px; background: rgba(255, 0, 0, 0.05);
+            border-radius: 8px; border: 1px solid rgba(255,0,0,0.2);
         }
-        .policy-alert i { color: var(--danger); margin-top: 2px; }
-        .policy-text { font-size: 0.75rem; color: #ddd; line-height: 1.4; }
+        .policy-check input[type="checkbox"] {
+            min-width: 20px; min-height: 20px; accent-color: var(--gold-primary); margin-top: 2px;
+        }
+        .policy-text {
+            font-size: 0.75rem; color: #ccc; line-height: 1.3;
+        }
+        .policy-text b { color: var(--danger); }
 
         .btn-luxury {
-            width: 100%; padding: 18px; 
+            width: 100%; padding: 15px; 
             background: var(--gold-gradient); color: #000;
             font-weight: 800; border: none; border-radius: 50px; font-size: 1rem;
             text-transform: uppercase; letter-spacing: 1px;
-            cursor: pointer; margin-top: 10px;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-            transition: transform 0.2s;
+            cursor: pointer; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
         }
-        .btn-luxury:active { transform: scale(0.96); }
 
         /* ==========================================================================
            4. MAIN INTERFACE
@@ -161,205 +142,204 @@
         #main-app { display: none; flex-direction: column; height: 100%; }
 
         header {
-            height: var(--header-h); padding: 0 25px;
+            flex-shrink: 0; height: 70px; padding: 0 20px;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,0.05); z-index: 100;
+            background: rgba(10, 10, 10, 0.95); border-bottom: 1px solid #222; z-index: 100;
         }
-        .header-brand {
-            font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700;
-            color: var(--gold-primary); letter-spacing: 1px;
+        .header-brand h1 {
+            font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800;
+            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .header-brand span { display: block; font-size: 0.6rem; color: #fff; letter-spacing: 3px; font-weight: 400; margin-top: 2px; }
-
-        .profile-btn {
+        .header-brand span { font-size: 0.65rem; color: #888; letter-spacing: 2px; display:block; }
+        
+        .icon-btn {
             width: 40px; height: 40px; border-radius: 50%;
-            background: rgba(255,255,255,0.1); color: #fff;
+            background: rgba(255,255,255,0.05); color: var(--gold-primary);
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(255,255,255,0.1); cursor: pointer;
+            border: 1px solid rgba(255,215,0,0.2); cursor: pointer;
         }
 
-        /* GRID SYSTEM */
         main {
-            flex: 1; overflow-y: auto; padding: 20px;
+            flex: 1; overflow-y: auto; overflow-x: hidden;
+            padding: 15px 15px 100px 15px; 
+            display: block; 
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif; font-size: 1.1rem; 
+            color: white; margin-bottom: 12px;
+            border-left: 4px solid var(--gold-primary); padding-left: 12px;
+        }
+
+        .products-grid {
             display: grid; grid-template-columns: 1fr 1fr; 
-            grid-auto-rows: 220px; gap: 15px;
-            padding-bottom: 30px;
+            grid-auto-rows: 230px; gap: 12px;
+            margin-bottom: 25px;
         }
 
         .card {
             background: var(--glass-bg); border: var(--glass-border);
-            backdrop-filter: var(--glass-blur); border-radius: var(--border-rad);
+            backdrop-filter: var(--glass-blur); border-radius: 16px;
             position: relative; overflow: hidden;
             display: flex; flex-direction: column;
-            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
-        .card:active { transform: scale(0.97); }
+        .card:active { transform: scale(0.98); }
 
-        /* IMAGE HANDLING - LOCAL ONLY FIX */
         .card-img-box {
-            height: 70%; width: 100%; position: relative; overflow: hidden; background: #000;
+            height: 72%; width: 100%; position: relative; overflow: hidden; background: #000;
         }
-        
         .card-img-box img { 
-            width: 100%; height: 100%; 
-            object-fit: cover;
-            object-position: center; 
-            opacity: 0.9; transition: 0.5s;
+            width: 100%; height: 100%; object-fit: cover; transition: 0.5s;
         }
-        
-        .card:hover .card-img-box img { transform: scale(1.1); opacity: 1; }
-
-        /* ERROR MESSAGE IN BOX IF FILE MISSING */
-        .img-err-msg {
-            width: 100%; height: 100%; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            color: #ff5555; font-size: 0.6rem; border: 1px dashed #444;
-        }
+        .card:hover .card-img-box img { transform: scale(1.1); }
 
         .card-details {
-            height: 30%; padding: 12px;
+            height: 28%; padding: 8px 10px;
             display: flex; flex-direction: column; justify-content: center;
-            background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(180deg, #1a1a1a, #000);
+            border-top: 1px solid #333; z-index: 2;
         }
 
-        .card-title { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: white; margin-bottom: 4px; }
-        .card-sub { font-size: 0.65rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .card-title { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; color: white; }
+        .card-sub { font-size: 0.7rem; color: var(--gold-primary); text-transform: uppercase; }
 
-        /* Full Width Item */
-        .card.full {
-            grid-column: span 2; height: 180px; flex-direction: row;
+        .card-full {
+            width: 100%; height: 160px;
+            border-radius: 16px; position: relative; overflow: hidden;
+            background: linear-gradient(90deg, #000 30%, transparent), url('https://i.ibb.co/bgcrV8V2/In-Shot-20260204-115718549.jpg');
+            background-size: cover; background-position: center;
+            border: 1px solid rgba(255,215,0,0.2);
+            display: flex; align-items: center; padding-left: 20px;
         }
-        .card.full .card-img-box { width: 55%; height: 100%; }
-        .card.full .card-details { 
-            width: 45%; height: 100%; align-items: flex-start; padding-left: 20px;
-            background: linear-gradient(90deg, #111 0%, transparent 100%);
-        }
+        .full-info h2 { color: var(--gold-primary); font-family: 'Orbitron'; line-height: 1.2; font-size: 1.4rem; }
+        .full-info p { color: #ccc; font-size: 0.7rem; margin-top: 5px; }
 
-        /* BOTTOM NAV */
         nav {
+            position: fixed; bottom: 0; left: 0; width: 100%;
             height: var(--nav-h); background: #080808;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-around; align-items: center;
-            padding-bottom: 10px; z-index: 100;
+            border-top: 1px solid rgba(255,215,0,0.2);
+            display: flex; justify-content: space-evenly; align-items: center;
+            z-index: 9999; 
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
+            padding-bottom: 5px; 
         }
+        
         .nav-item {
             display: flex; flex-direction: column; align-items: center; gap: 6px;
-            color: #555; font-size: 0.7rem; font-weight: 600; transition: 0.3s;
+            color: #666; font-size: 0.8rem; font-weight: 600;
+            padding: 10px 20px;
         }
-        .nav-item i { font-size: 1.5rem; transition: 0.3s; }
+        .nav-item i { font-size: 1.4rem; transition: 0.3s; }
         .nav-item.active { color: var(--gold-primary); }
-        .nav-item.active i { transform: translateY(-3px); text-shadow: 0 5px 15px var(--gold-glow); }
+        .nav-item.active i { transform: translateY(-4px); text-shadow: 0 0 10px var(--gold-primary); }
 
         /* ==========================================================================
-           5. GALLERY OVERLAY (SLIDE UP)
+           5. GALLERY & MODALS
            ========================================================================== */
         #gallery-view {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 60000;
-            transform: translateY(110%); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            background: #050505; z-index: 60000;
+            transform: translateY(110%); transition: transform 0.4s ease;
             display: flex; flex-direction: column;
         }
-
         .gal-header {
-            height: 70px; padding: 0 20px; display: flex; align-items: center; gap: 15px;
+            height: 70px; padding: 0 20px; display: flex; align-items: center; gap: 20px;
             border-bottom: 1px solid #222; background: #0a0a0a;
         }
-        .gal-back {
-            font-size: 1.4rem; color: #fff; padding: 10px; cursor: pointer;
-        }
-        .gal-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--gold-primary); }
-
+        .gal-back { font-size: 1.4rem; color: #fff; padding: 10px; cursor: pointer; }
         .gal-grid {
             flex: 1; overflow-y: auto; padding: 15px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
         }
-
         .gal-item {
-            aspect-ratio: 1/1; background: #1a1a1a; border-radius: 12px;
-            overflow: hidden; border: 2px solid transparent; position: relative;
+            aspect-ratio: 1/1; background: #222; border-radius: 12px; overflow: hidden;
+            border: 2px solid transparent; position: relative;
         }
         .gal-item img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .gal-item.selected {
-            border-color: var(--gold-primary);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 0 15px var(--gold-glow);
-        }
+        .gal-item.selected { border-color: var(--gold-primary); transform: scale(0.95); }
+        .gal-footer { padding: 20px; background: #080808; border-top: 1px solid #222; }
 
-        /* 6th Custom Item */
-        .gal-item-custom {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: rgba(37, 211, 102, 0.1); border: 1px dashed var(--success);
-            color: var(--success); text-align: center;
-        }
-        .gal-item-custom i { font-size: 2rem; margin-bottom: 5px; }
-        .gal-item-custom span { font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
-
-        .gal-footer {
-            padding: 20px; background: #080808; border-top: 1px solid #222;
-            padding-bottom: 30px;
-        }
-        
         /* ==========================================================================
-           6. PROFILE POPUP
+           6. DASHBOARD STYLING (NEW - FILLED SPACE)
            ========================================================================== */
         #profile-pop {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 70000;
-            display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.98); z-index: 70000;
+            display: none; flex-direction: column; backdrop-filter: blur(10px);
+            overflow-y: auto;
         }
-        .pro-card {
-            width: 85%; max-width: 350px; background: #111;
-            border: 1px solid var(--gold-primary); border-radius: 20px;
-            padding: 40px 20px; text-align: center; position: relative;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.15);
+        .dash-header { 
+            padding: 25px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #222; background: #0a0a0a;
         }
-        .pro-icon {
-            width: 80px; height: 80px; background: #222; border-radius: 50%;
-            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
-            font-size: 2.5rem; color: var(--gold-primary); border: 2px solid #333;
-        }
-        .pro-name { font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 5px; }
-        .pro-phone { font-size: 0.9rem; color: #888; font-family: monospace; letter-spacing: 1px; }
         
-        .close-pro {
-            position: absolute; top: 15px; right: 20px; font-size: 1.5rem; color: #666; cursor: pointer;
+        .dash-content {
+            flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 15px;
+        }
+
+        .pro-card {
+            padding: 30px; background: linear-gradient(135deg, #151515, #000);
+            border: 1px solid var(--gold-secondary); border-radius: 20px; text-align: center;
+            position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .edit-inp {
+            width: 100%; background: #222; border: 1px solid #444; color: white;
+            padding: 10px; margin-bottom: 10px; text-align: center; border-radius: 8px;
+        }
+        
+        .action-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+        }
+        .action-btn {
+            background: #111; padding: 25px 15px; border-radius: 15px; 
+            text-align: center; color: #ccc; border: 1px solid #222;
+            transition: 0.2s; cursor: pointer;
+        }
+        .action-btn:active { transform: scale(0.96); background: #1a1a1a; }
+
+        /* ADDRESS CARD TO FILL SPACE */
+        .address-card {
+            background: rgba(30, 30, 30, 0.5); border: 1px dashed #444;
+            border-radius: 15px; padding: 20px; display: flex; gap: 15px; align-items: center;
+            margin-top: 5px; flex: 1; /* Pushes content to fill space */
+            min-height: 120px; align-items: flex-start;
+        }
+        .addr-icon {
+            width: 40px; height: 40px; background: #222; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold-primary); flex-shrink: 0;
+        }
+
+        .dev-footer {
+            margin-top: auto; padding: 20px; text-align: center; border-top: 1px solid #222;
+            background: #050505;
         }
 
     </style>
 </head>
 <body>
 
-    <!-- 1. CINEMATIC LOADER -->
+    <!-- 1. LOADER -->
     <div id="app-loader">
-        <div class="loader-logo-cont">
-            <div class="spinner-gold"></div>
-            <div class="spinner-inner"></div>
-        </div>
-        <div class="brand-text-loader">
-            RITESH BHATIA<br>STUDIO
-        </div>
+        <div class="spinner-gold"></div>
+        <div class="brand-text-loader">RITESH BHATIA<br>STUDIO</div>
     </div>
 
-    <!-- 2. LOGIN (VIP) -->
+    <!-- 2. LOGIN -->
     <div id="auth-screen">
         <div class="auth-card">
-            <div class="auth-logo">RITESH BHATIA<br>STUDIO</div>
-            
+            <div class="auth-logo">RITESH BHATIA STUDIO</div>
             <input type="text" id="u-name" class="input-field" placeholder="Full Name" autocomplete="off">
             <input type="tel" id="u-phone" class="input-field" placeholder="WhatsApp Number" maxlength="10">
 
-            <div class="policy-alert">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <div class="policy-text">
-                    Strict Policy: Orders are confirmed once placed. <b>No Refund</b> after delivery.
-                </div>
-            </div>
-
-            <div style="display:flex; gap:10px; align-items:center; margin-bottom:20px; font-size:0.8rem; color:#888;">
-                <input type="checkbox" id="u-agree" style="accent-color:var(--gold-primary); width:18px; height:18px;">
-                <label for="u-agree">I agree to terms & I am 18+</label>
-            </div>
+            <label class="policy-check">
+                <input type="checkbox" id="policy-agree">
+                <span class="policy-text">
+                    <b>POLICY RULE:</b> Design print hone ke baad refund nhi hoga and delivery hone ke baad bhi same rule hai.
+                </span>
+            </label>
 
             <button class="btn-luxury" onclick="handleLogin()">ENTER STUDIO</button>
         </div>
@@ -369,79 +349,52 @@
     <div id="main-app">
         <header>
             <div class="header-brand">
-                RITESH BHATIA STUDIO
-                <span>PREMIUM PRINTING</span>
+                <h1>RITESH BHATIA</h1>
+                <span>PREMIUM PRINTING STUDIO</span>
             </div>
-            <div class="profile-btn" onclick="toggleProfile(true)">
-                <i class="fa-solid fa-user"></i>
+            <div class="icon-btn" onclick="toggleProfile(true)">
+                <i class="fa-solid fa-bars"></i>
             </div>
         </header>
 
         <main>
-            <!-- Card 1 -->
-            <div class="card" onclick="openGal('tshirt', 'Custom T-Shirts')">
-                <div class="card-img-box">
-                    <img src="images/tshirt_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/tshirt_1.jpg</div>'">
+            <div class="section-title">CATEGORIES</div>
+            <div class="products-grid">
+                <!-- Items -->
+                <div class="card" onclick="openGal('tshirt', 'Custom T-Shirts')">
+                    <div class="card-img-box"><img id="thumb-tshirt" src=""></div>
+                    <div class="card-details"><div class="card-title">T-Shirts</div><div class="card-sub">Premium Cotton</div></div>
                 </div>
-                <div class="card-details">
-                    <div class="card-title">T-Shirts</div>
-                    <div class="card-sub">Premium Cotton</div>
+                <div class="card" onclick="openGal('cap', 'Premium Caps')">
+                    <div class="card-img-box"><img id="thumb-cap" src=""></div>
+                    <div class="card-details"><div class="card-title">Caps</div><div class="card-sub">Embroidered</div></div>
                 </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="card" onclick="openGal('cap', 'Pro Caps')">
-                <div class="card-img-box">
-                    <img src="images/cap_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/cap_1.jpg</div>'">
+                <div class="card" onclick="openGal('mug', 'Magic Mugs')">
+                    <div class="card-img-box"><img id="thumb-mug" src=""></div>
+                    <div class="card-details"><div class="card-title">Mugs</div><div class="card-sub">Ceramic & Magic</div></div>
                 </div>
-                <div class="card-details">
-                    <div class="card-title">Caps</div>
-                    <div class="card-sub">Embroidered</div>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card" onclick="openGal('mug', 'Magic Mugs')">
-                <div class="card-img-box">
-                    <img src="images/mug_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/mug_1.jpg</div>'">
-                </div>
-                <div class="card-details">
-                    <div class="card-title">Mugs</div>
-                    <div class="card-sub">Heat Reactive</div>
+                <div class="card" onclick="openGal('gift', 'Luxury Gifts')">
+                    <div class="card-img-box"><img id="thumb-gift" src=""></div>
+                    <div class="card-details"><div class="card-title">Gifts</div><div class="card-sub">Custom Items</div></div>
                 </div>
             </div>
 
-            <!-- Card 4 -->
-            <div class="card" onclick="openGal('gift', 'Luxury Gifts')">
-                <div class="card-img-box">
-                    <img src="images/gift_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/gift_1.jpg</div>'">
-                </div>
-                <div class="card-details">
-                    <div class="card-title">Gifts</div>
-                    <div class="card-sub">Personalized</div>
-                </div>
-            </div>
-
-            <!-- Card 5 (Full Width) -->
-            <div class="card full" onclick="openGal('all', 'Studio Services')">
-                <div class="card-img-box">
-                    <img src="images/all_1.jpg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-err-msg\'>UPLOAD PHOTO<br>images/all_1.jpg</div>'">
-                </div>
-                <div class="card-details">
-                    <div class="card-title">All Printing Services</div>
-                    <div class="card-sub" style="margin-top:5px; color:#aaa; font-size:0.6rem;">Frames, Bottles, Keychains & More</div>
-                    <div style="margin-top:10px; padding:5px 12px; background:var(--gold-primary); color:black; font-size:0.6rem; font-weight:bold; border-radius:4px;">VIEW ALL</div>
+            <div class="section-title">STUDIO EXCLUSIVE</div>
+            <div class="card-full" onclick="openGal('all', 'All Services')">
+                <div class="full-info">
+                    <h2>ALL PRINTING<br>SERVICES</h2>
+                    <p>EXPLORE FULL CATALOG &rarr;</p>
                 </div>
             </div>
         </main>
 
         <nav>
             <div class="nav-item active">
-                <i class="fa-solid fa-house-chimney"></i>
+                <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </div>
             <div class="nav-item" onclick="toggleProfile(true)">
-                <i class="fa-solid fa-address-card"></i>
+                <i class="fa-solid fa-user-gear"></i>
                 <span>Profile</span>
             </div>
         </nav>
@@ -453,187 +406,250 @@
             <div class="gal-back" onclick="closeGal()"><i class="fa-solid fa-arrow-left"></i></div>
             <div class="gal-title" id="g-title">Category</div>
         </div>
-        
-        <div class="gal-grid" id="g-grid">
-            <!-- JS will fill this -->
-        </div>
-
+        <div class="gal-grid" id="g-grid"></div>
         <div class="gal-footer">
-            <button id="wa-action" class="btn-luxury" style="background:#333; color:#777;">
-                Select Design First
-            </button>
+            <button id="wa-action" class="btn-luxury" style="background:#222; color:#555;">Select Item</button>
         </div>
     </div>
 
-    <!-- 5. PROFILE MODAL -->
+    <!-- 5. DASHBOARD (UPDATED TO FILL SPACE) -->
     <div id="profile-pop">
-        <div class="pro-card">
-            <div class="close-pro" onclick="toggleProfile(false)"><i class="fa-solid fa-xmark"></i></div>
-            
-            <div class="pro-icon"><i class="fa-solid fa-user-tie"></i></div>
-            <div class="pro-name" id="p-name">Loading...</div>
-            <div class="pro-phone" id="p-phone">...</div>
-
-            <div style="margin-top:30px; border-top:1px solid #333; padding-top:20px;">
-                <p style="font-size:0.7rem; color:#555; margin-bottom:15px;">Ritesh Bhatia Studio App v2.0</p>
-                <button class="btn-luxury" style="background:transparent; border:1px solid #333; color:white;" onclick="doLogout()">LOGOUT</button>
+        <div class="dash-header">
+            <span style="color:white; font-family:'Orbitron'; letter-spacing:1px;">DASHBOARD</span>
+            <i class="fa-solid fa-xmark" style="color:#666; font-size:1.5rem; cursor:pointer;" onclick="toggleProfile(false)"></i>
+        </div>
+        
+        <div class="dash-content">
+            <!-- Profile Card -->
+            <div class="pro-card">
+                <i class="fa-solid fa-pen-to-square" style="position:absolute; top:20px; right:20px; color:#666; cursor:pointer;" onclick="toggleEdit()"></i>
+                <div style="font-size:3.5rem; color:var(--gold-primary); margin-bottom:15px;">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+                
+                <div id="disp-data">
+                    <h2 id="p-name" style="color:white; margin-bottom:5px;">User</h2>
+                    <p id="p-phone" style="color:var(--gold-secondary); font-family:monospace;">...</p>
+                </div>
+                
+                <div id="edit-data" style="display:none; margin-top:15px;">
+                    <input id="ed-name" class="edit-inp" placeholder="Name">
+                    <input id="ed-phone" class="edit-inp" placeholder="Number">
+                    <textarea id="ed-loc" class="edit-inp" placeholder="Enter Delivery Address / Location" rows="3"></textarea>
+                    <button onclick="saveEdit()" style="background:var(--gold-gradient); border:none; padding:10px 25px; border-radius:50px; font-weight:bold; width:100%;">SAVE CHANGES</button>
+                </div>
             </div>
+
+            <!-- Support Buttons -->
+            <div class="action-grid">
+                <div class="action-btn" onclick="openSupport()">
+                    <i class="fa-solid fa-headset" style="color:#0088cc; font-size:1.8rem; margin-bottom:10px;"></i>
+                    <div style="font-size:0.9rem;">Support</div>
+                </div>
+                <div class="action-btn" onclick="openInsta()">
+                    <i class="fa-brands fa-instagram" style="color:#C13584; font-size:1.8rem; margin-bottom:10px;"></i>
+                    <div style="font-size:0.9rem;">Instagram</div>
+                </div>
+            </div>
+
+            <!-- Address Card (To Fill Space) -->
+            <div class="address-card" onclick="toggleEdit()">
+                <div class="addr-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div style="text-align:left;">
+                    <div style="color:var(--gold-secondary); font-size:0.8rem; font-weight:bold; margin-bottom:5px;">SAVED LOCATION</div>
+                    <div id="disp-loc" style="color:#aaa; font-size:0.85rem; line-height:1.4;">Tap 'Edit' icon to add your delivery location...</div>
+                </div>
+            </div>
+
+            <button onclick="logout()" style="background:transparent; border:1px solid #333; color:#666; padding:15px; border-radius:12px; margin-top:10px;">LOGOUT</button>
+        </div>
+
+        <div class="dev-footer">
+            <p style="color:#444; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase;">Designed & Engineered By</p>
+            <p style="color:var(--gold-primary); font-weight:bold; margin-top:5px; font-size:0.9rem;">Pratik Sharma</p>
         </div>
     </div>
 
     <script>
-        /* CONFIGURATION */
-        const OWNER_WA = "919140662705"; // Your Number
-        let currentCat = "";
-        let selectedIdx = -1;
+        const OWNER_WA = "919140662705";
+        const INSTA_LINK = "https://www.instagram.com/riteshbhatia322?igsh=amsyOWtscXdpZmxx";
+        
+        let currentCat = "", selectedIdx = -1;
 
-        /* INITIALIZATION */
+        // URLS
+        const studioImages = {
+            'gift': [ "https://i.ibb.co/nNzDMM6R/gift-1.jpg", "https://i.ibb.co/CsQc7yPH/gift-5.jpg", "https://i.ibb.co/Fb8Cmckq/gift-4.jpg", "https://i.ibb.co/C3gkYkhx/gift-2.jpg", "https://i.ibb.co/DfQQ1rww/gift-3.webp" ],
+            'cap': [ "https://i.ibb.co/TBXQ8V8p/cap-3.jpg", "https://i.ibb.co/TMBm7rJq/cap-1.png", "https://i.ibb.co/TDbM0TCc/cap-2.png", "https://i.ibb.co/5hS4ZF3G/cap-4.jpg", "https://i.ibb.co/N63N99CL/cap-5.jpg" ],
+            'mug': [ "https://i.ibb.co/9JrNqKq/mug-1.jpg", "https://i.ibb.co/sdbw8cgx/mug-2.jpg", "https://i.ibb.co/GfB9stMd/mug-5.jpg", "https://i.ibb.co/8g3gR6xC/mug-4.jpg", "https://i.ibb.co/Jw8LsgSZ/mug-3.jpg" ],
+            'tshirt': [ "https://i.ibb.co/k6y2cXmv/tshirt-2.jpg", "https://i.ibb.co/LdtGB88k/tshirt-1.jpg", "https://i.ibb.co/Qjr47RVM/tshirt-5.jpg", "https://i.ibb.co/d4h2728M/tshirt-4.jpg", "https://i.ibb.co/CpT99RxW/tshirt-3.jpg" ],
+            'all': [ "https://i.ibb.co/vRfGWs9/In-Shot-20260204-115634481.jpg", "https://i.ibb.co/Q33tqhmG/In-Shot-20260204-115741639.jpg", "https://i.ibb.co/39Y5XKWd/In-Shot-20260204-115807441.jpg", "https://i.ibb.co/vxYsXmjJ/In-Shot-20260204-115841534.jpg", "https://i.ibb.co/bgcrV8V2/In-Shot-20260204-115718549.jpg" ]
+        };
+
         window.onload = () => {
-            // Fake loading time for premium feel
+            // Set Thumbnails
+            document.getElementById('thumb-tshirt').src = studioImages['tshirt'][0];
+            document.getElementById('thumb-cap').src = studioImages['cap'][0];
+            document.getElementById('thumb-mug').src = studioImages['mug'][0];
+            document.getElementById('thumb-gift').src = studioImages['gift'][0];
+
             setTimeout(() => {
                 document.getElementById('app-loader').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('app-loader').style.display = 'none';
+                setTimeout(() => { 
+                    document.getElementById('app-loader').style.display = 'none'; 
                     checkAuth();
                 }, 800);
             }, 2000);
         };
 
-        function checkAuth() {
-            const data = localStorage.getItem('rbs_user');
-            if(data) {
-                const user = JSON.parse(data);
-                if(user.n && user.p) {
-                    launchApp(user);
-                    return;
-                }
+        // AUDIO LOGIC
+        function playWelcome() {
+            if('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const msg = new SpeechSynthesisUtterance("Welcome Ritesh Bhatia Studio. Ritesh Bhatia Studio me aapka sawgat hai.");
+                msg.rate = 0.9;
+                window.speechSynthesis.speak(msg);
             }
-            document.getElementById('auth-screen').style.display = 'flex';
+        }
+
+        function checkAuth() {
+            const u = JSON.parse(localStorage.getItem('rbs_pro_final'));
+            if(u && u.n) {
+                launch(u);
+                document.body.addEventListener('click', () => playWelcome(), {once:true});
+            } else {
+                document.getElementById('auth-screen').style.display = 'flex';
+            }
         }
 
         function handleLogin() {
-            const n = document.getElementById('u-name').value.trim();
-            const p = document.getElementById('u-phone').value.trim();
-            const agree = document.getElementById('u-agree').checked;
+            const n = document.getElementById('u-name').value;
+            const p = document.getElementById('u-phone').value;
+            const agree = document.getElementById('policy-agree').checked;
 
-            if(n.length < 3) { alert("Please enter your Full Name properly."); return; }
-            if(p.length < 10) { alert("Please enter valid WhatsApp Number."); return; }
-            if(!agree) { alert("You must agree to the policy."); return; }
+            if(n.length<3 || p.length<10) { alert("Invalid Details"); return; }
+            if(!agree) { alert("Please agree to the Policy Rule."); return; }
 
-            const user = { n, p };
-            localStorage.setItem('rbs_user', JSON.stringify(user));
-            
+            const u = {n, p, l: ""}; // l = location
+            localStorage.setItem('rbs_pro_final', JSON.stringify(u));
+            playWelcome();
             document.getElementById('auth-screen').style.display = 'none';
-            launchApp(user);
+            launch(u);
         }
 
-        function launchApp(user) {
+        function launch(u) {
             document.getElementById('main-app').style.display = 'flex';
-            document.getElementById('p-name').innerText = user.n;
-            document.getElementById('p-phone').innerText = "+91 " + user.p;
+            
+            // Profile Updates
+            document.getElementById('p-name').innerText = u.n;
+            document.getElementById('p-phone').innerText = "+91 " + u.p;
+            
+            // Edit Fields
+            document.getElementById('ed-name').value = u.n;
+            document.getElementById('ed-phone').value = u.p;
+            
+            // Location Logic
+            if(u.l && u.l.trim() !== "") {
+                document.getElementById('ed-loc').value = u.l;
+                document.getElementById('disp-loc').innerText = u.l;
+                document.getElementById('disp-loc').style.color = "#fff";
+            } else {
+                document.getElementById('disp-loc').innerText = "Tap 'Edit' icon above to add your location...";
+            }
         }
 
-        /* GALLERY SYSTEM - STRICTLY LOCAL IMAGES */
+        // GALLERY
         function openGal(key, title) {
-            currentCat = title;
-            selectedIdx = -1;
+            currentCat = title; selectedIdx = -1;
             document.getElementById('g-title').innerText = title;
-            
             const grid = document.getElementById('g-grid');
             grid.innerHTML = "";
-            
             resetBtn();
 
-            // Create 6 Items (5 Images + 1 Custom)
-            for(let i=1; i<=6; i++) {
-                const el = document.createElement('div');
-                
-                if(i === 6) {
-                    el.className = "gal-item gal-item-custom";
-                    el.innerHTML = `<i class="fa-brands fa-whatsapp"></i><span>Send Your<br>Own Photo</span>`;
-                } else {
-                    el.className = "gal-item";
-                    
-                    // FIXED: Removed all Internet/Unsplash Fallbacks
-                    // Now it attempts to load local image. If fails, shows text error.
-                    const imgPath = `images/${key}_${i}.jpg`;
-                    
-                    el.innerHTML = `
-                        <img src="${imgPath}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'color:red; font-size:10px; display:flex; justify-content:center; align-items:center; height:100%; text-align:center;\'>FILE MISSING<br>${imgPath}</div>'">
-                    `;
-                }
+            studioImages[key].forEach((img, i) => {
+                const d = document.createElement('div');
+                d.className = "gal-item";
+                d.innerHTML = `<img src="${img}">`;
+                d.onclick = () => selItem(d, i+1);
+                grid.appendChild(d);
+            });
 
-                el.onclick = () => selectItem(el, i);
-                grid.appendChild(el);
-            }
+            const c = document.createElement('div');
+            c.className = "gal-item";
+            c.style.display = "flex"; c.style.flexDirection="column"; c.style.alignItems="center"; c.style.justifyContent="center";
+            c.style.border="1px dashed #25D366"; c.style.background="rgba(37,211,102,0.1)";
+            c.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:2rem; color:#25D366;"></i><span style="font-size:0.7rem; color:#25D366; margin-top:5px;">SEND OWN<br>PHOTO</span>`;
+            c.onclick = () => selItem(c, 999);
+            grid.appendChild(c);
 
             document.getElementById('gallery-view').style.transform = "translateY(0)";
         }
 
-        function closeGal() {
-            document.getElementById('gallery-view').style.transform = "translateY(110%)";
-        }
+        function closeGal() { document.getElementById('gallery-view').style.transform = "translateY(110%)"; }
 
-        function selectItem(el, idx) {
-            // Remove previous selection
-            document.querySelectorAll('.gal-item').forEach(d => d.classList.remove('selected'));
+        function selItem(el, idx) {
+            document.querySelectorAll('.gal-item').forEach(e => e.classList.remove('selected'));
             el.classList.add('selected');
             selectedIdx = idx;
-
-            const btn = document.getElementById('wa-action');
-            btn.style.color = "#000";
-            
-            if(idx === 6) {
-                btn.style.background = "#25D366"; // WA Green
-                btn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> &nbsp; SEND PHOTO ON WHATSAPP`;
+            const b = document.getElementById('wa-action');
+            if(idx===999) {
+                b.style.background = "#25D366"; b.innerText = "SEND ON WHATSAPP";
             } else {
-                btn.style.background = "var(--gold-gradient)";
-                btn.innerHTML = `BOOK DESIGN #${idx} <i class="fa-solid fa-arrow-right"></i>`;
+                b.style.background = "var(--gold-gradient)"; b.innerText = `BOOK DESIGN #${idx}`;
             }
-            btn.onclick = sendToWA;
+            b.onclick = sendWA;
         }
 
         function resetBtn() {
-            const btn = document.getElementById('wa-action');
-            btn.style.background = "#333";
-            btn.style.color = "#777";
-            btn.innerHTML = "Select Design First";
-            btn.onclick = null;
+            const b = document.getElementById('wa-action');
+            b.style.background = "#222"; b.innerText = "Select Item"; b.onclick = null;
         }
 
-        /* WHATSAPP LOGIC */
-        function sendToWA() {
+        function sendWA() {
             if(selectedIdx === -1) return;
-
-            const user = JSON.parse(localStorage.getItem('rbs_user'));
-            let text = `*RITESH BHATIA STUDIO ORDER* 🎙%0A%0A`;
-            text += `👤 Name: ${user.n}%0A📱 Phone: ${user.p}%0A`;
-            text += `🏷 Category: ${currentCat}%0A`;
+            const u = JSON.parse(localStorage.getItem('rbs_pro_final'));
             
-            if(selectedIdx === 6) {
-                text += `---------------------%0A`;
-                text += `📸 *CUSTOM PHOTO REQUEST*%0A`;
-                text += `I will share my photo now. Please check price.%0A`;
-                text += `---------------------`;
-            } else {
-                text += `✅ Selected Design: *No. ${selectedIdx}*%0A`;
-                text += `Please confirm availability & price.`;
+            let t = `*ORDER RITESH BHATIA STUDIO*%0A`;
+            t += `-----------------------%0A`;
+            t += `👤 Name: ${u.n}%0A`;
+            t += `📱 Phone: ${u.p}%0A`;
+            
+            if(u.l && u.l.trim() !== "") {
+                t += `📍 Location: ${u.l}%0A`;
             }
-
-            window.location.href = `https://wa.me/${OWNER_WA}?text=${text}`;
+            
+            t += `-----------------------%0A`;
+            t += `📂 Category: ${currentCat}%0A`;
+            t += selectedIdx===999 ? `📸 Request: CUSTOM PHOTO PRINT` : `✅ Design No: ${selectedIdx}`;
+            
+            window.location.href = `https://wa.me/${OWNER_WA}?text=${t}`;
         }
 
-        /* UTILS */
-        function toggleProfile(show) {
-            document.getElementById('profile-pop').style.display = show ? 'flex' : 'none';
+        // PROFILE
+        function toggleProfile(s) { document.getElementById('profile-pop').style.display = s ? 'flex' : 'none'; }
+        
+        function toggleEdit() {
+            const d = document.getElementById('disp-data');
+            const e = document.getElementById('edit-data');
+            if(e.style.display === 'none') { e.style.display = 'block'; d.style.display = 'none'; }
+            else { e.style.display = 'none'; d.style.display = 'block'; }
         }
-
-        function doLogout() {
-            if(confirm("Logout from Ritesh Bhatia Studio?")) {
-                localStorage.removeItem('rbs_user');
-                location.reload();
+        
+        function saveEdit() {
+            const n = document.getElementById('ed-name').value;
+            const p = document.getElementById('ed-phone').value;
+            const l = document.getElementById('ed-loc').value; // Get Location
+            
+            if(n && p) {
+                const u = {n, p, l};
+                localStorage.setItem('rbs_pro_final', JSON.stringify(u));
+                launch(u); toggleEdit();
             }
         }
+        
+        function openSupport() { window.location.href = `https://wa.me/${OWNER_WA}?text=Hi, I need support with my order.`; }
+        function openInsta() { window.open(INSTA_LINK, '_blank'); }
+        function logout() { if(confirm("Logout?")) { localStorage.removeItem('rbs_pro_final'); location.reload(); } }
+
     </script>
 </body>
 </html>
