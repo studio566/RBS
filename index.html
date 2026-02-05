@@ -38,24 +38,20 @@
       animation: blinkText 1.2s infinite;
     }
 
-    h1 {
-      font-size: 40px;
+    .english {
+      font-size: 36px;
       font-weight: 900;
       color: #ff2d2d;
       line-height: 1.3;
       animation: blinkText 1.2s infinite;
     }
 
-    p {
-      margin-top: 18px;
-      font-size: 22px;
-      color: #e0e0e0;
-    }
-
-    .tap-text {
-      margin-top: 15px;
-      font-size: 16px;
-      color: #ffb3b3;
+    .hindi {
+      margin-top: 20px;
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.4;
     }
 
     @keyframes blinkText {
@@ -71,48 +67,21 @@
 </head>
 <body>
 
-  <!-- ALERT SOUND -->
-  <audio id="alertSound" loop>
-    <source src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="lock-container" onclick="playSound()">
+  <div class="lock-container">
     <div class="lock-icon">🔒</div>
 
-    <h1>
-      Ritesh Bhatia Studio<br>
-      ne abhi payment nahi kiya hai
-    </h1>
+    <!-- English -->
+    <div class="english">
+      Ritesh Bhatia Studio has not made the payment yet.<br>
+      Without payment, the website will not start.
+    </div>
 
-    <p>
-      Bina payment ke website access allow nahi hai.<br>
-      Payment hone ke baad hi website chalu hogi.
-    </p>
-
-    <div class="tap-text">
-      (Sound ke liye screen par tap karein)
+    <!-- Hindi -->
+    <div class="hindi">
+      रितेश भाटिया स्टूडियो के पास अभी पेमेंट नहीं किया है।<br>
+      बिना पे के वेबसाइट शुरू नहीं होगी।
     </div>
   </div>
-
-  <script>
-    function isMobile() {
-      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
-
-    function playSound() {
-      if (isMobile()) {
-        const sound = document.getElementById("alertSound");
-        sound.play().catch(() => {});
-      }
-    }
-
-    // Auto try on load (mobile only)
-    window.onload = () => {
-      if (isMobile()) {
-        playSound();
-      }
-    };
-  </script>
 
 </body>
 </html>
