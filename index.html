@@ -1,1 +1,118 @@
-.
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Locked</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #1a1a1a, #000);
+      color: #fff;
+    }
+
+    .lock-container {
+      text-align: center;
+      padding: 40px;
+      border: 4px solid #ff2d2d;
+      border-radius: 16px;
+      max-width: 95%;
+      animation: blinkBorder 1.2s infinite;
+    }
+
+    .lock-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: blinkText 1.2s infinite;
+    }
+
+    h1 {
+      font-size: 40px;
+      font-weight: 900;
+      color: #ff2d2d;
+      line-height: 1.3;
+      animation: blinkText 1.2s infinite;
+    }
+
+    p {
+      margin-top: 18px;
+      font-size: 22px;
+      color: #e0e0e0;
+    }
+
+    .tap-text {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ffb3b3;
+    }
+
+    @keyframes blinkText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @keyframes blinkBorder {
+      0%, 100% { border-color: #ff2d2d; }
+      50% { border-color: #ffffff; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ALERT SOUND -->
+  <audio id="alertSound" loop>
+    <source src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="lock-container" onclick="playSound()">
+    <div class="lock-icon">🔒</div>
+
+    <h1>
+      Ritesh Bhatia Studio<br>
+      ne abhi payment nahi kiya hai
+    </h1>
+
+    <p>
+      Bina payment ke website access allow nahi hai.<br>
+      Payment hone ke baad hi website chalu hogi.
+    </p>
+
+    <div class="tap-text">
+      (Sound ke liye screen par tap karein)
+    </div>
+  </div>
+
+  <script>
+    function isMobile() {
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function playSound() {
+      if (isMobile()) {
+        const sound = document.getElementById("alertSound");
+        sound.play().catch(() => {});
+      }
+    }
+
+    // Auto try on load (mobile only)
+    window.onload = () => {
+      if (isMobile()) {
+        playSound();
+      }
+    };
+  </script>
+
+</body>
+</html>
